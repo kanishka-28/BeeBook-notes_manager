@@ -1,25 +1,75 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router,  Switch,  Route } from "react-router-dom";
+import NoteState from "./context/notes/noteState";
+import HomeLayout from "./layout/Home.layout";
+import AddNote from "./Pages/AddNote";
+import Home from "./Pages/Home";
+import About from "./Pages/About";
+import Login from "./Pages/login";
+import Signup from "./Pages/signup";
+import PlaneLayout from "./layout/plane.layout";
+import axios from "axios"
+import LoginState from "./context/user/loginState";
+import SingleNote from "./Pages/SingleNote";
+import NoteDetailsState from "./context/notes/NoteDetailsState";
+import EditModal from "./components/editModal";
+import EditToggle from "./context/user/edit";
+import SearchState from "./context/notes/search";
 
-function App() {
+//axios default settings
+axios.defaults.baseURL = 'http://localhost:4001';
+axios.defaults.params = {};
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <div>
+      <LoginState>
+        <NoteState>
+            <NoteDetailsState>
+              <EditToggle>
+                <SearchState>
+                <Switch>
+                <Route exact path="/">
+                  <HomeLayout>
+                    <Home />
+                  </HomeLayout>
+                </Route>
+                <Route exact path="/addnote">
+                  <HomeLayout>
+                    <AddNote />
+                  </HomeLayout>
+                </Route>
+                <Route exact path="/about">
+                  <PlaneLayout>
+                    <About />
+                  </PlaneLayout>
+                </Route>
+                <Route exact path="/singlenote">
+                  <HomeLayout>
+                    <SingleNote />
+                    <EditModal/>
+                  </HomeLayout>
+                </Route>
+                <Route exact path="/login">
+                  <PlaneLayout>
+                    <Login />
+                  </PlaneLayout>
+                </Route>
+                <Route exact path="/signup">
+                  <PlaneLayout>
+                    <Signup />
+                  </PlaneLayout>
+                </Route>
+              </Switch>
+                </SearchState>
+              </EditToggle>
+            </NoteDetailsState>
+        </NoteState>
+      </LoginState>
+      </div>
+    </Router>
+  )
 }
 
-export default App;
+export default App
