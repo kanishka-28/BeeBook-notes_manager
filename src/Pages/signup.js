@@ -19,7 +19,7 @@ const Signup = () => {
     const [hide, sethide] = useState("hidden");
     const [error, seterror] = useState("");
     const [cursor, setcursor] = useState("not-allowed")
-    const { setGPhoto } = useContext(LoginContext);
+    const { setGPhoto, setlogin } = useContext(LoginContext);
 
     const nameHandle = (e) => { setinfo({ ...info, name: e.target.value }) }
     const emailHandle = (e) => { setinfo({ ...info, email: e.target.value }) }
@@ -46,9 +46,9 @@ const Signup = () => {
         Promise.resolve(signupApi(info)).then(res => {
             localStorage.setItem("token", res.data.jwtToken);
             history.push("/");
+            setlogin(true)
             setGPhoto(userLogo)
         }).catch((e) => {
-
             seterror(e.response.data.error);
             sethide("block");
             setTimeout(() => {
@@ -62,7 +62,7 @@ const Signup = () => {
             <div className={`${hide}`}>
                 <Alert message={error} />
             </div>
-            <div className="w-full mx-auto md:w-1/3 bg-gradient-to-br from-pink-400 to-yellow-100 rounded-xl p-4" >
+            <div className="w-full mx-auto md:w-2/3 lg:w-1/3 bg-gradient-to-br from-pink-400 to-yellow-100 rounded-xl p-4" >
                 <h2 className="text-lg font-bold mx-5 text-center" >New User? Sign up to start creating free notes, accessible from anywhere anytime.</h2>
                 <form onSubmit={addUserHandle}  > {/* call a function here*/}
                     <div className="m-2 py-3 overflow-hidden sm:rounded-md">

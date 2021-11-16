@@ -19,11 +19,13 @@ const SingleNote = () => {
     const history = useHistory()
 
     const copy = () => {
-        setColor("green-300")
+        setColor("green-700")
         navigator.clipboard.writeText(noteDetails.description);
         sethide("block")
         setTimeout(() => {
             sethide("hidden")
+            console.log("color");
+            console.log(color);
             setColor("gray-600")
         }, [1000])
     }

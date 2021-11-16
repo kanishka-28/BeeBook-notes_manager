@@ -25,9 +25,7 @@ const AddNote = () => {
         settitle("")
         setdescription("")
         settag("")
-        console.log(updateState);
         setupdateState(!updateState)
-        console.log(updateState);
         setTimeout(() => {
             sethide("hidden")
             history.push("/");
