@@ -17,7 +17,7 @@ import EditToggle from "./context/user/edit";
 import SearchState from "./context/notes/search";
 
 //axios default settings
-axios.defaults.baseURL = 'http://localhost:4001';
+axios.defaults.baseURL = 'https://boobook-1305.herokuapp.com/';
 axios.defaults.params = {};
 
 const App = () => {
